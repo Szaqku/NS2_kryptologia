@@ -1,4 +1,4 @@
-package pl.szaqku;
+package pl.szaqku.lab1;
 
 import pl.szaqku.lab1.AesCipher;
 import pl.szaqku.lab1.AesUtil;
