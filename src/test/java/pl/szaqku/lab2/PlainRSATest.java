@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 
 import java.math.BigInteger;
 
-public class AppTest extends TestCase {
+public class PlainRSATest extends TestCase {
 
     public void testGetPrime() {
         var prime = NumberUtil.getPrime(3, 100, BigInteger.valueOf(3));
@@ -21,7 +21,7 @@ public class AppTest extends TestCase {
 
     public void testRSA() {
         var plain = "Testowy string";
-        var rsaInstance = new RSA();
+        var rsaInstance = new PlainRSA(4096);
         var encrypted = rsaInstance.encrypt(plain);
         var decrypted = rsaInstance.decrypt(encrypted);
 
