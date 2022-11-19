@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 
 public class PlainRSATest extends TestCase {
 
@@ -21,12 +22,25 @@ public class PlainRSATest extends TestCase {
 
     public void testRSA() {
         var plain = "Testowy string";
-        var rsaInstance = new PlainRSA(4096);
+        var rsaInstance = new PlainRSA(1024);
         var encrypted = rsaInstance.encrypt(plain);
         var decrypted = rsaInstance.decrypt(encrypted);
 
         System.out.println(rsaInstance.toString());
 
+        Assert.assertTrue(rsaInstance.verify(plain, encrypted));
         Assert.assertEquals(plain, decrypted);
+    }
+
+    public void testSign() throws NoSuchAlgorithmException {
+        var plain = "Testowy string";
+        var rsaInstance = new PlainRSA(1024);
+
+        var sig = rsaInstance.sign(plain);
+
+        Assert.assertTrue(rsaInstance.verifySignature(plain, sig));
+    }
+
+    public void testVerifySignature() {
     }
 }
