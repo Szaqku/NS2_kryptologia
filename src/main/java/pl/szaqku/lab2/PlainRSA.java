@@ -2,7 +2,6 @@ package pl.szaqku.lab2;
 
 import java.math.BigInteger;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -15,8 +14,15 @@ public class PlainRSA {
     private BigInteger p;
     private BigInteger q;
     private BigInteger e;
+    private MessageDigest hashAlg;
 
     public PlainRSA(int byteLength) {
+        try {
+            hashAlg = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            noSuchAlgorithmException.printStackTrace();
+        }
+
         Random random = new Random();
         this.p = BigInteger.probablePrime(byteLength, random);
         this.q = BigInteger.probablePrime(byteLength, random);
@@ -37,8 +43,16 @@ public class PlainRSA {
     public byte[] encrypt(String message) {
         return encrypt(new BigInteger(message.getBytes()), e, n).toByteArray();
     }
+    public byte[] encrypt(byte[] message) {
+        return encrypt(new BigInteger(message), e, n).toByteArray();
+    }
+
     public String decrypt(byte[] bytes) {
         return byteToString(decrypt(new BigInteger(bytes), d, n).toByteArray());
+    }
+
+    public byte[] decryptBytes(byte[] bytes) {
+        return decrypt(new BigInteger(bytes), d, n).toByteArray();
     }
 
     private static String byteToString(byte[] cipher) {
@@ -64,18 +78,16 @@ public class PlainRSA {
         return Arrays.equals(encrypt(message, e, n).toByteArray(), signature);
     }
 
-    public byte[] sign(String message) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] encodedhash = digest.digest(message.getBytes(StandardCharsets.UTF_8));
+    public byte[] sign(String message) {
+        byte[] encodedhash = hashAlg.digest(message.getBytes());
         return new BigInteger(encodedhash).modPow(d, n).toByteArray();
     }
 
-    public boolean verifySignature(String message, byte[] sig) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] hash = digest.digest(message.getBytes(StandardCharsets.UTF_8));
+    public boolean verifySignature(String message, byte[] sig) {
+        var hash = new BigInteger(hashAlg.digest(message.getBytes()));
         var hashFromSig = new BigInteger(sig).modPow(e, n);
 
-        return new BigInteger(hash).equals(hashFromSig);
+        return hash.equals(hashFromSig);
     }
 
     @Override

@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class App {
     /**
+     * <p>
      * Zadanie 3.2
      * a. Wiadomość o jakiej maksymalnie długości można podpisać za pomocą tego algorytmu?
      * RSA is only able to encrypt data to a maximum amount equal to your key size (2048 bits = 256 bytes),
@@ -39,7 +40,16 @@ public class App {
      * d. Jak ustala się wartość klucza publicznego?
      * Wartość stanowi para liczb: {e,n}
      * <p>
-     * Zadanie 4.1
+     * Zadanie 4.2
+     * a. wydłuża działanie całego procesu
+     * b. tak
+     * Zadanie 4.3
+     * a. System jest bezpieczny, jeśli atakujący nie jest w stanie
+     * wygenerować nowej (innej, ot tych które przejął)
+     * wiadomości m’, którą można prawidłowo zweryfikować
+     * systemem sprawdzania podpisu elektronicznego
+     * c. e musi spełniać warunek (1 < e < φ(n)) i musi być liczbą względnie pierwszą z φ(n). Może być stałe, natomiast nie jest to zalecane.
+     * d.
      */
 
     public static void main(String[] args) throws IOException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {

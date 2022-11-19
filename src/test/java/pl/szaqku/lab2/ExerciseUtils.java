@@ -20,11 +20,14 @@ public class ExerciseUtils extends TestCase {
 //    }
 
     public void testEx1() {
-        var rsa = new PlainRSA(64);
+        var rsa = new PlainRSA(256);
 
-        var s = rsa.encrypt("ABC");
+        var s = rsa.encrypt("AAAAA");
         var m = new BigInteger(s).modPow(rsa.getE(), rsa.getN());
+
+        Assert.assertTrue(rsa.verify(new BigInteger(s), m.toByteArray()));
     }
+
     public void testEx2() {
         var rsa = new PlainRSA(64);
 

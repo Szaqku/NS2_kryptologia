@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 
 public class PlainRSATest extends TestCase {
 
@@ -22,7 +23,7 @@ public class PlainRSATest extends TestCase {
 
     public void testRSA() {
         var plain = "Testowy string";
-        var rsaInstance = new PlainRSA(1024);
+        var rsaInstance = new PlainRSA(256);
         var encrypted = rsaInstance.encrypt(plain);
         var decrypted = rsaInstance.decrypt(encrypted);
 
@@ -32,15 +33,28 @@ public class PlainRSATest extends TestCase {
         Assert.assertEquals(plain, decrypted);
     }
 
-    public void testSign() throws NoSuchAlgorithmException {
+    /*
+    new BigInteger(
+        MessageDigest.getInstance("SHA-256").digest(message.getBytes())
+    )
+    .equals(
+        new BigInteger(decryptBytes(
+            encrypt(new BigInteger(
+                MessageDigest.getInstance("SHA-256").digest(
+                    message.getBytes()
+                )
+            ).toByteArray())
+        ))
+    )
+     */
+    public void testSignVerify() throws NoSuchAlgorithmException {
         var plain = "Testowy string";
         var rsaInstance = new PlainRSA(1024);
 
         var sig = rsaInstance.sign(plain);
 
+        System.out.println(HexFormat.of().formatHex(sig));
         Assert.assertTrue(rsaInstance.verifySignature(plain, sig));
     }
 
-    public void testVerifySignature() {
-    }
 }
