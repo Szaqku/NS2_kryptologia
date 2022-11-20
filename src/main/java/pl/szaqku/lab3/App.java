@@ -1,4 +1,4 @@
-package pl.szaqku.lab2;
+package pl.szaqku.lab3;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;

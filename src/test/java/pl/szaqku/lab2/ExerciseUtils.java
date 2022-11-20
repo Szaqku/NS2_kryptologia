@@ -68,11 +68,6 @@ public class ExerciseUtils extends TestCase {
         Assert.assertEquals("TMEK", out);
     }
 
-    public void testZad4() throws NoSuchAlgorithmException {
-        var rsa = new PlainRSA(64);
-
-    }
-
     public String fromHex(String hex) throws UnsupportedEncodingException {
         hex = hex.replaceAll("^(00)+", "");
         byte[] bytes = new byte[hex.length() / 2];
