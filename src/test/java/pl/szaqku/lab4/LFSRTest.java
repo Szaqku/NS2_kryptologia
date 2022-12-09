@@ -2,11 +2,14 @@ package pl.szaqku.lab4;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
+import pl.szaqku.lab4.generator.impl.GeffGenerator;
+import pl.szaqku.lab4.generator.impl.LFSR;
+import pl.szaqku.lab4.generator.impl.ShrinkingGenerator;
+import pl.szaqku.lab4.generator.impl.StopAndGoGenerator;
+import pl.szaqku.lab4.test.LongRunsTest;
+import pl.szaqku.lab4.test.PokerTest;
 
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LFSRTest extends TestCase {
 
@@ -41,24 +44,24 @@ public class LFSRTest extends TestCase {
         Assert.assertEquals(lfsr.getRegister(), "111");
     }
 
-    public void testGeff() {
-
-    }
-
-    public void testPokerTest() {
+    public void testRunTest() {
         var generators = Set.of(
             GeffGenerator.class,
             StopAndGoGenerator.class,
             ShrinkingGenerator.class
         );
         var tests = Set.of(
+            new PokerTest(),
+            new LongRunsTest(),
             new PokerTest()
         );
 
         for (var test : tests) {
+            System.out.println(test.getClass().getSimpleName());
             for (var generatorClass : generators) {
-                var result = test.test(GeneratorStrategy.generate(2000, generatorClass));
-                System.out.println(generatorClass.getName()+": "+result);
+                var result = test.test(GeneratorStrategy.generate(20000, generatorClass));
+                System.out.println(generatorClass.getSimpleName()+": "+result);
+                assertTrue(result);
             }
         }
     }

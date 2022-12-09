@@ -1,11 +1,12 @@
-package pl.szaqku.lab4;
+package pl.szaqku.lab4.generator.impl;
 
 
 //import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigInteger;
-import java.util.BitSet;
-import java.util.Random;
+import pl.szaqku.lab4.generator.BitGenerator;
+
+import java.security.SecureRandom;
+import java.util.stream.Collectors;
 
 import static pl.szaqku.lab4.Helper.fromBoolean;
 import static pl.szaqku.lab4.Helper.toBoolean;
@@ -32,7 +33,9 @@ public class LFSR implements BitGenerator {
     }
 
     private static String generateRandomNLengthValue(int n) {
-        return BigInteger.probablePrime(n, new Random()).toString(2);
+        return new SecureRandom().ints(n, 0, 2)
+            .mapToObj(String::valueOf)
+            .collect(Collectors.joining());
     }
 
     @Override

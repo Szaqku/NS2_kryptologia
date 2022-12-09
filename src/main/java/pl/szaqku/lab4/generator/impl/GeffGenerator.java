@@ -1,7 +1,9 @@
-package pl.szaqku.lab4;
+package pl.szaqku.lab4.generator.impl;
 
 
 //import lombok.extern.slf4j.Slf4j;
+
+import pl.szaqku.lab4.generator.BitGenerator;
 
 import static pl.szaqku.lab4.Helper.fromBoolean;
 import static pl.szaqku.lab4.Helper.toBoolean;

@@ -1,4 +1,4 @@
-package pl.szaqku.lab4;
+package pl.szaqku.lab4.generator;
 
 public interface BitGenerator {
     public char nextBit();

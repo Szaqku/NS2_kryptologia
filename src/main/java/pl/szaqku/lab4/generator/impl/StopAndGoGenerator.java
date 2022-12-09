@@ -1,4 +1,6 @@
-package pl.szaqku.lab4;
+package pl.szaqku.lab4.generator.impl;
+
+import pl.szaqku.lab4.generator.BitGenerator;
 
 import static pl.szaqku.lab4.Helper.fromBoolean;
 import static pl.szaqku.lab4.Helper.toBoolean;

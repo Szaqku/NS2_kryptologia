@@ -1,6 +1,10 @@
 package pl.szaqku.lab4;
 
-import java.util.Set;
+import pl.szaqku.lab4.generator.*;
+import pl.szaqku.lab4.generator.impl.GeffGenerator;
+import pl.szaqku.lab4.generator.impl.LFSR;
+import pl.szaqku.lab4.generator.impl.ShrinkingGenerator;
+import pl.szaqku.lab4.generator.impl.StopAndGoGenerator;
 
 public class GeneratorStrategy {
 
