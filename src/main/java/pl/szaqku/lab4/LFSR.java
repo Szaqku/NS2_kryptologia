@@ -53,9 +53,9 @@ public class LFSR implements BitGenerator {
             }
         }
 
-        System.out.println("PRE : "+register+" p: ("+randomPattern+")");
+//        System.out.println("PRE : "+register+" p: ("+randomPattern+")");
         shiftRegisterAndAddNewBit(result);
-        System.out.println("POST: "+register);
+//        System.out.println("POST: "+register);
 
         return fromBoolean(result);
     }

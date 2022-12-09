@@ -3,7 +3,6 @@ package pl.szaqku.lab4;
 import static pl.szaqku.lab4.Helper.toBoolean;
 
 public class ShrinkingGenerator implements BitGenerator {
-
     private final LFSR lfsr1;
     private final LFSR lfsr2;
 
@@ -24,7 +23,7 @@ public class ShrinkingGenerator implements BitGenerator {
             return lastBit;
         }
 
-        return '\0';
+        return nextBit();
     }
 
     @Override
