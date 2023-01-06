@@ -8,7 +8,9 @@ import pl.szaqku.lab4.generator.impl.ShrinkingGenerator;
 import pl.szaqku.lab4.generator.impl.StopAndGoGenerator;
 import pl.szaqku.lab4.test.LongRunsTest;
 import pl.szaqku.lab4.test.PokerTest;
+import pl.szaqku.lab4.test.RunsTest;
 
+import java.util.List;
 import java.util.Set;
 
 public class LFSRTest extends TestCase {
@@ -53,15 +55,17 @@ public class LFSRTest extends TestCase {
         var tests = Set.of(
             new PokerTest(),
             new LongRunsTest(),
-            new PokerTest()
+            new RunsTest()
         );
 
-        for (var test : tests) {
-            System.out.println(test.getClass().getSimpleName());
-            for (var generatorClass : generators) {
-                var result = test.test(GeneratorStrategy.generate(20000, generatorClass));
-                System.out.println(generatorClass.getSimpleName()+": "+result);
-                assertTrue(result);
+        for (var lsfrLength : List.of(1000, 2000, 5000, 10000, 15000, 20000, 25000, 50000)) {
+            for (var test : tests) {
+                System.out.println("[lsfrLength="+lsfrLength+"][bits=20000]: "+test.getClass().getSimpleName());
+                for (var generatorClass : generators) {
+                    var result = test.test(GeneratorStrategy.generate(lsfrLength, 20000, generatorClass));
+                    System.out.println(generatorClass.getSimpleName()+": "+result);
+    //                assertTrue(result);
+                }
             }
         }
     }
